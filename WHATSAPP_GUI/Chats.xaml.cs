@@ -39,8 +39,8 @@ namespace WHATSAPP_GUI
         Mutex mtx;
         CancellationTokenSource cts;
         CancellationTokenSource cts2;
-        [DllImport("kernel32.dll")]
-        static extern bool AllocConsole();
+       
+       
         ChatVisualizer cv;
 
         public Chats(NetworkStreamMutexed st,string t,int IdUser)
@@ -48,8 +48,8 @@ namespace WHATSAPP_GUI
             _stream = st;
             chats = new List<Chat>();
             InitializeComponent();
-            AllocConsole(); // Crea la console
-            Console.WriteLine("Console collegata all'applicazione WPF!");
+   
+          
             utenti = new List<dynamic>();
             _token = t;
             idUser = IdUser;
