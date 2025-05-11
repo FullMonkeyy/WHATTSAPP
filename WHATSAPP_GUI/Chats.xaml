@@ -1,0 +1,115 @@
+﻿<UserControl x:Class="WHATSAPP_GUI.Chats"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1000" Loaded="UserControl_Loaded_1" Unloaded="UserControl_Unloaded">
+    <Grid Name="Maingrid" Background="#F0F0F0">
+        <Grid.ColumnDefinitions>
+            <!-- Sidebar per le chat con larghezza fissa -->
+            <ColumnDefinition Width="500"/>
+            <!-- Area restante per il contenuto principale -->
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Sidebar in stile WhatsApp Web -->
+        <DockPanel Grid.Column="0" Background="White">
+            <!-- Header con menu -->
+            <Menu DockPanel.Dock="Top" Background="#075E54">
+                <MenuItem Header="AGGIUNGI CHAT" Width="100" Click="MenuItem_Click_1" 
+                          Foreground="White" Background="#075E54" BorderBrush="Transparent"/>                
+            </Menu>
+
+            <!-- Lista delle chat -->
+            <ListBox Name="Listachatss" SelectionChanged="Listachatss_SelectionChanged" 
+                     BorderThickness="0" Background="White" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <!-- Border nominato per poter applicare un trigger al passaggio del mouse -->
+                        <Border x:Name="ChatBorder" Margin="5" CornerRadius="5" Background="Transparent">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <!-- Immagine profilo -->
+                                    <ColumnDefinition Width="1*"/>
+                                    <!-- Nome e anteprima messaggio -->
+                                    <ColumnDefinition Width="1*"/>
+                                    <!-- Timestamp -->
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+								<Image Source="{Binding Immagine}" Grid.Column="0" Width="50" Height="50"
+			  Margin="5" Stretch="UniformToFill" ClipToBounds="True" VerticalAlignment="Center">
+									<Image.Clip>
+										<EllipseGeometry Center="25,25" RadiusX="20" RadiusY="20" />
+									</Image.Clip>
+								</Image>
+
+
+								
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="5">
+                                    <TextBlock Text="{Binding nomecontact}" FontWeight="Bold" 
+                                               FontSize="14" Foreground="#075E54"/>
+                                    <!-- Campo facoltativo per l'anteprima dell'ultimo messaggio -->
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding LastMessage.Text}" FontSize="12" Foreground="black" 
+                                    TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Column="2" Text="{Binding LastMessage.dataora}" FontSize="10" 
+Foreground="Gray" VerticalAlignment="Top" Margin="20,2,0,0"/>
+                                        <Ellipse Width="15" Height="15"  Fill="{Binding ColorNotification}" Margin="20,0,0,0" >
+                                           </Ellipse>
+                                    </StackPanel>
+                                  
+                                </StackPanel>
+                               
+                            </Grid>
+                        </Border>
+                        <!-- Trigger per evidenziare l'item al mouseover -->
+                        <DataTemplate.Triggers>
+                            <Trigger Property="ListBoxItem.IsMouseOver" Value="True">
+                                <Setter TargetName="ChatBorder" Property="Background" Value="#E8F5E9"/>
+                            </Trigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </DockPanel>
+
+        <!-- Grid nascosta per la selezione utenti -->
+        <Grid Name="PopupGrid" Background="#AA000000" Visibility="Collapsed" Grid.ColumnSpan="1">
+            <Border Width="400" Height="500" Background="White" CornerRadius="10" Padding="10"
+        VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel>
+                    <TextBox Name="SearchBox" Width="300" Height="30" Margin="0,0,0,10"
+                 TextChanged="SearchBox_TextChanged" />
+
+                    <!-- Abilitare lo scrolling -->
+                    <ScrollViewer Height="350" VerticalScrollBarVisibility="Auto">
+                        <ListBox Name="UserListBox" BorderThickness="0">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Margin="5" CornerRadius="5" Background="Transparent">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="60"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Image Grid.Column="0" 
+                                       Source="pack://siteoforigin:,,,/Resources/profile_icon_design_free_vector.jpg" 
+                                       Width="50" Height="50" VerticalAlignment="Center" Margin="5"/>
+                                            <TextBlock Grid.Column="1" Text="{Binding Username}" VerticalAlignment="Center"
+                                           FontWeight="Bold" FontSize="14" Foreground="#075E54"/>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </ScrollViewer>
+
+                    <Button Content="Conferma" Width="100" Height="30" Click="Button_Click_1" 
+                HorizontalAlignment="Center" Margin="0,10,0,0"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>
