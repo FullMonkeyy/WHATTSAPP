@@ -18,7 +18,7 @@ Right here you can find two different chats that are chatting each others. You m
 ![Chat](https://github.com/FullMonkeyy/WHATTSAPP/blob/master/Screenshots/Chat.png)
 
 # An unread chat example
-The messages have the double blue check which allow you to understand whether the other user actually received and read the message.
-The other youser will see a notification rappresented by the green circle near the photo profile.
+The messages have the double blue check which allow you to understand whether the other user actually has received and read the message.
+The other user would see a notification rappresented by the green circle near the photo profile if he received a message.
 
 ![Unread chat](https://github.com/FullMonkeyy/WHATTSAPP/blob/master/Screenshots/Unread%20chat.png)
